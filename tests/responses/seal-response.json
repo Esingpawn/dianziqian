@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "message": "获取印章详情成功",
+  "data": {
+    "id": "61fa9cbb6f2d7a1e9c5dcb40",
+    "name": "个人签名",
+    "imageUrl": "https://example.com/seals/personal-seal.png",
+    "type": "personal",
+    "isDefault": true,
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-02T00:00:00Z"
+  }
+} 

@@ -1,0 +1,26 @@
+&lt;!-- pages/seals/seals.wxml -->
+<view class="container">
+  <view class="seals-grid">
+    <view class="seal-item" wx:for="{{seals}}" wx:key="id" bindtap="selectSeal" data-id="{{item.id}}">
+      <view class="seal-image {{item.id === selectedSealId ? 'selected' : ''}}">
+        <image src="{{item.imageUrl}}" mode="aspectFit"></image>
+        <view wx:if="{{item.isNew}}" class="seal-badge">NEW</view>
+      </view>
+      <view class="seal-info">
+        <text class="seal-name">{{item.name}}</text>
+        <view class="seal-status">
+          <text class="status-badge {{item.isAuthorized ? 'authorized' : 'unauthorized'}}">
+            {{item.isAuthorized ? '已授权' : '未授权'}}
+          </text>
+          <button class="btn-authorize" catchtap="authorizeSeal" data-id="{{item.id}}">
+            {{item.isAuthorized ? '取消授权' : '授权'}}
+          </button>
+        </view>
+      </view>
+    </view>
+    
+    <view class="seal-item add-seal" bindtap="addSeal">
+      <view class="add-icon">+</view>
+      <text>添加印章</text>### 电子合同签署微信小程序开发
+
+基于您的需求，我将为您开发一个完整的电子合同签署微信小程序，包括前端界面和后端API实现。

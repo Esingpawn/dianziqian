@@ -1,0 +1,37 @@
+&lt;!-- pages/login/login.wxml -->
+<view class="container login-container">
+  <view class="logo-container">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+  </view>
+  
+  <view class="login-form">
+    <button class="btn-wechat" bindtap="handleWechatLogin">
+      <image class="wechat-icon" src="/images/wechat.png" mode="aspectFit"></image>
+      微信授权登录
+    </button>
+    
+    <view class="divider-container">
+      <view class="divider-line"></view>
+      <view class="divider-text">或</view>
+      <view class="divider-line"></view>
+    </view>
+    
+    <view class="input-group">
+      <input class="input" type="number" placeholder="请输入手机号" bindinput="handlePhoneInput" value="{{phone}}" />
+    </view>
+    
+    <view class="input-group verification-code">
+      <input class="input" type="number" placeholder="请输入验证码" bindinput="handleCodeInput" value="{{code}}" />
+      <button class="btn-code {{isSendingCode ? 'disabled' : ''}}" bindtap="handleSendCode" disabled="{{isSendingCode}}">
+        {{isSendingCode ? countdown + 's后重发' : '获取验证码'}}
+      </button>
+    </view>
+    
+    <button class="btn-login" bindtap="handlePhoneLogin">手机号登录</button>
+  </view>
+  
+  <view class="agreement">
+    <text>登录即表示同意</text>
+    <text class="agreement-link" bindtap="showPrivacyPolicy">《隐私政策和服务条款》</text>
+  </view>
+</view>

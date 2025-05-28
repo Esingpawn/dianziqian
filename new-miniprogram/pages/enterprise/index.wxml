@@ -1,0 +1,165 @@
+<!-- pages/enterprise/index.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="header-title">企业认证</view>
+    
+    <!-- 认证状态 -->
+    <view class="status-badge {{status}}">
+      <text wx:if="{{status === 'unverified'}}">未认证</text>
+      <text wx:elif="{{status === 'pending'}}">审核中</text>
+      <text wx:elif="{{status === 'verified'}}">已认证</text>
+      <text wx:elif="{{status === 'rejected'}}">已拒绝</text>
+    </view>
+  </view>
+
+  <!-- 认证说明 -->
+  <view class="info-card">
+    <view class="info-title">认证说明</view>
+    <view class="info-content">
+      <view class="info-item">
+        <view class="info-icon"></view>
+        <text>通过企业认证后，可使用企业电子签章</text>
+      </view>
+      <view class="info-item">
+        <view class="info-icon"></view>
+        <text>认证信息需与营业执照保持一致</text>
+      </view>
+      <view class="info-item">
+        <view class="info-icon"></view>
+        <text>审核时间为1-3个工作日</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 未认证状态 -->
+  <block wx:if="{{status === 'unverified'}}">
+    <view class="form-card">
+      <view class="form-title">填写认证信息</view>
+      <view class="form-item">
+        <view class="form-label">企业名称</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入营业执照上的企业名称" 
+          value="{{formData.name}}" 
+          bindinput="handleNameInput"
+        />
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">营业执照号</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入统一社会信用代码" 
+          value="{{formData.licenseNumber}}" 
+          bindinput="handleLicenseNumberInput"
+        />
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">营业执照</view>
+        <view class="license-upload" bindtap="uploadLicense">
+          <block wx:if="{{formData.licenseImage}}">
+            <image src="{{formData.licenseImage}}" mode="aspectFit" class="license-image"></image>
+            <view class="reupload-text">点击重新上传</view>
+          </block>
+          <block wx:else>
+            <view class="upload-icon"></view>
+            <view class="upload-text">点击上传营业执照</view>
+          </block>
+        </view>
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">联系人姓名</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入联系人姓名" 
+          value="{{formData.contactName}}" 
+          bindinput="handleContactNameInput"
+        />
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">联系人电话</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入联系人电话" 
+          value="{{formData.contactPhone}}" 
+          bindinput="handleContactPhoneInput"
+          type="number"
+          maxlength="11"
+        />
+      </view>
+      
+      <view class="form-item">
+        <view class="form-label">企业地址</view>
+        <input 
+          class="form-input" 
+          placeholder="请输入企业地址" 
+          value="{{formData.address}}" 
+          bindinput="handleAddressInput"
+        />
+      </view>
+      
+      <button class="submit-btn" bindtap="submitVerification">提交认证</button>
+    </view>
+  </block>
+
+  <!-- 审核中状态 -->
+  <block wx:elif="{{status === 'pending'}}">
+    <view class="status-card">
+      <view class="status-icon pending"></view>
+      <view class="status-title">企业认证审核中</view>
+      <view class="status-desc">您的企业认证材料已提交，预计1-3个工作日内完成审核</view>
+      <view class="status-tip">审核结果将通过短信通知，请保持手机畅通</view>
+    </view>
+  </block>
+
+  <!-- 已认证状态 -->
+  <block wx:elif="{{status === 'verified'}}">
+    <view class="status-card">
+      <view class="status-icon verified"></view>
+      <view class="status-title">企业认证已通过</view>
+      <view class="status-desc">您可以使用企业电子签章进行合同签署</view>
+      <view class="info-list">
+        <view class="info-row">
+          <view class="info-label">企业名称</view>
+          <view class="info-value">{{enterpriseInfo.name}}</view>
+        </view>
+        <view class="info-row">
+          <view class="info-label">营业执照号</view>
+          <view class="info-value">{{enterpriseInfo.licenseNumber}}</view>
+        </view>
+        <view class="info-row">
+          <view class="info-label">联系人</view>
+          <view class="info-value">{{enterpriseInfo.contactName}}</view>
+        </view>
+        <view class="info-row">
+          <view class="info-label">联系电话</view>
+          <view class="info-value">{{enterpriseInfo.contactPhone}}</view>
+        </view>
+        <view class="info-row">
+          <view class="info-label">认证时间</view>
+          <view class="info-value">{{enterpriseInfo.verifiedAt}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 已拒绝状态 -->
+  <block wx:elif="{{status === 'rejected'}}">
+    <view class="status-card">
+      <view class="status-icon rejected"></view>
+      <view class="status-title">企业认证未通过</view>
+      <view class="status-desc">您的企业认证申请未通过审核，原因如下：</view>
+      <view class="reject-reason">{{enterpriseInfo.rejectReason || '认证信息与营业执照不符'}}</view>
+      <button class="resubmit-btn" bindtap="getEnterpriseInfo">重新提交</button>
+    </view>
+  </block>
+
+  <!-- 未登录提示 -->
+  <view class="login-prompt" wx:if="{{!hasLogin}}">
+    <view class="login-prompt-text">登录后申请企业认证</view>
+    <navigator url="/pages/auth/login" class="login-prompt-button">立即登录</navigator>
+  </view>
+</view> 

@@ -1,0 +1,223 @@
+/* pages/seals/index.wxss */
+
+.container {
+  padding: 30rpx;
+  padding-bottom: 120rpx;
+}
+
+/* 头部 */
+.header {
+  margin-bottom: 40rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: 600;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: var(--text-color-tertiary);
+}
+
+/* 印章列表 */
+.seal-list {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.seal-item {
+  padding: 30rpx;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.seal-item:last-child {
+  border-bottom: none;
+}
+
+.seal-content {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.seal-image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 30rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seal-image image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.seal-info {
+  flex: 1;
+}
+
+.seal-name {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 10rpx;
+}
+
+.seal-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.seal-type {
+  font-size: 26rpx;
+  color: var(--text-color-secondary);
+  margin-right: 16rpx;
+}
+
+.seal-status {
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+
+.status-success {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+
+.status-warning {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--warning-color);
+}
+
+.seal-time {
+  font-size: 26rpx;
+  color: var(--text-color-tertiary);
+}
+
+.seal-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.seal-action {
+  min-width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--primary-color);
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 30rpx;
+  margin-left: 20rpx;
+  padding: 0 20rpx;
+}
+
+.seal-action.disabled {
+  color: var(--text-color-tertiary);
+  background-color: #f5f5f5;
+}
+
+.seal-action.delete {
+  color: var(--error-color);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* 空状态 */
+.empty-state {
+  padding: 100rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: var(--card-shadow);
+}
+
+.empty-icon {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 10rpx;
+  color: var(--text-color);
+}
+
+.empty-subtext {
+  font-size: 28rpx;
+  color: var(--text-color-tertiary);
+}
+
+/* 加载遮罩 */
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.loading-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+  border: 6rpx solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: var(--text-color-tertiary);
+}
+
+/* 创建印章按钮 */
+.create-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 4rpx 10rpx rgba(59, 130, 246, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-icon {
+  font-size: 60rpx;
+  color: #ffffff;
+  line-height: 1;
+} 

@@ -1,0 +1,81 @@
+<view class="container">
+  <!-- 合同详情 -->
+  <block wx:if="{{contract && !isLoading}}">
+    <view class="contract-card">
+      <view class="contract-header">
+        <view class="contract-title">{{contract.title}}</view>
+        <view class="contract-status status-{{contract.status}}">{{contract.statusText}}</view>
+      </view>
+      
+      <view class="contract-info">
+        <view class="info-item">
+          <view class="info-label">合同编号</view>
+          <view class="info-value">{{contract.contractNo}}</view>
+        </view>
+        <view class="info-item">
+          <view class="info-label">创建时间</view>
+          <view class="info-value">{{contract.createTime}}</view>
+        </view>
+        <view class="info-item">
+          <view class="info-label">更新时间</view>
+          <view class="info-value">{{contract.updateTime}}</view>
+        </view>
+        <view class="info-item">
+          <view class="info-label">发起方</view>
+          <view class="info-value">{{contract.initiator}}</view>
+        </view>
+        <view class="info-item">
+          <view class="info-label">接收方</view>
+          <view class="info-value">{{contract.receiver}}</view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 合同内容预览 -->
+    <view class="preview-card" bindtap="handlePreviewContract">
+      <view class="preview-icon"></view>
+      <view class="preview-info">
+        <view class="preview-title">查看合同文件</view>
+        <view class="preview-desc">点击查看完整合同内容</view>
+      </view>
+      <view class="preview-arrow"></view>
+    </view>
+    
+    <!-- 签署记录 -->
+    <view class="sign-card">
+      <view class="card-title">签署记录</view>
+      <view class="sign-list" wx:if="{{contract.signRecords && contract.signRecords.length > 0}}">
+        <view class="sign-item" wx:for="{{contract.signRecords}}" wx:key="id">
+          <view class="sign-user">
+            <image class="sign-avatar" src="{{item.avatar || '../../assets/images/default-avatar.png'}}"></image>
+            <view class="sign-info">
+              <view class="sign-name">{{item.name}}</view>
+              <view class="sign-time">{{item.signTime}}</view>
+            </view>
+          </view>
+          <view class="sign-status status-{{item.status}}">{{item.statusText}}</view>
+        </view>
+      </view>
+      <view class="empty-sign" wx:else>
+        <view class="empty-text">暂无签署记录</view>
+      </view>
+    </view>
+    
+    <!-- 操作按钮 -->
+    <view class="action-buttons" wx:if="{{contract.status === 'pending'}}">
+      <block wx:if="{{contract.isInitiator}}">
+        <button class="action-btn revoke-btn" bindtap="handleRevokeContract" disabled="{{isActionLoading}}">撤销合同</button>
+      </block>
+      <block wx:else>
+        <button class="action-btn reject-btn" bindtap="handleRejectContract" disabled="{{isActionLoading}}">拒绝</button>
+        <button class="action-btn sign-btn" bindtap="handleSignContract" disabled="{{isActionLoading}}">签署</button>
+      </block>
+    </view>
+  </block>
+  
+  <!-- 加载中 -->
+  <view class="loading-mask" wx:if="{{isLoading}}">
+    <view class="loading-icon"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view> 

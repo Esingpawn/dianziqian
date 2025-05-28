@@ -1,0 +1,264 @@
+/* pages/contracts/detail/index.wxss */
+.container {
+  padding: 30rpx;
+}
+
+/* 合同卡片 */
+.contract-card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: var(--card-shadow);
+}
+
+.contract-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.contract-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--text-color);
+  flex: 1;
+}
+
+.contract-status {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.status-pending {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--primary-color);
+}
+
+.status-completed {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+
+.status-rejected {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error-color);
+}
+
+/* 合同信息 */
+.contract-info {
+  background-color: #f9fafb;
+  border-radius: 8rpx;
+  padding: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 16rpx;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  width: 160rpx;
+  color: var(--text-color-secondary);
+  font-size: 28rpx;
+}
+
+.info-value {
+  flex: 1;
+  color: var(--text-color);
+  font-size: 28rpx;
+  word-break: break-all;
+}
+
+/* 预览卡片 */
+.preview-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: var(--card-shadow);
+}
+
+.preview-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.preview-info {
+  flex: 1;
+}
+
+.preview-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 6rpx;
+}
+
+.preview-desc {
+  font-size: 24rpx;
+  color: var(--text-color-tertiary);
+}
+
+.preview-arrow {
+  width: 16rpx;
+  height: 16rpx;
+  border-top: 4rpx solid #999;
+  border-right: 4rpx solid #999;
+  transform: rotate(45deg);
+}
+
+/* 签署记录 */
+.sign-card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: var(--card-shadow);
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+  color: var(--text-color);
+}
+
+.sign-list {
+  padding: 0 10rpx;
+}
+
+.sign-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.sign-item:last-child {
+  border-bottom: none;
+}
+
+.sign-user {
+  display: flex;
+  align-items: center;
+}
+
+.sign-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.sign-info {
+  flex: 1;
+}
+
+.sign-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 6rpx;
+}
+
+.sign-time {
+  font-size: 24rpx;
+  color: var(--text-color-tertiary);
+}
+
+.empty-sign {
+  display: flex;
+  justify-content: center;
+  padding: 40rpx 0;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-color-tertiary);
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40rpx;
+}
+
+.action-btn {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.sign-btn {
+  flex: 1;
+  background-color: var(--primary-color);
+  color: #fff;
+  margin-left: 20rpx;
+}
+
+.reject-btn {
+  width: 200rpx;
+  background-color: #fff;
+  color: var(--error-color);
+  border: 2rpx solid var(--error-color);
+}
+
+.revoke-btn {
+  width: 100%;
+  background-color: #fff;
+  color: var(--error-color);
+  border: 2rpx solid var(--error-color);
+}
+
+/* 加载状态 */
+.loading-mask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400rpx;
+}
+
+.loading-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+  border: 6rpx solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: var(--text-color-tertiary);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 

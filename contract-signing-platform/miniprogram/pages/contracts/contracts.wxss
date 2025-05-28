@@ -1,0 +1,178 @@
+/* pages/contracts/contracts.wxss */
+.container {
+  padding: 0;
+  padding-bottom: 120rpx;
+}
+
+.tabs {
+  display: flex;
+  background-color: #ffffff;
+  border-bottom: 1rpx solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 24rpx 30rpx;
+  font-size: 28rpx;
+  color: var(--text-color-secondary);
+  position: relative;
+}
+
+.tab.active {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background-color: var(--primary-color);
+}
+
+.contract-list {
+  padding: 20rpx 30rpx;
+}
+
+.contract-item {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+  padding: 24rpx;
+  display: flex;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.contract-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+
+.contract-icon image {
+  width: 100%;
+  height: 100%;
+}
+
+.contract-info {
+  flex: 1;
+}
+
+.contract-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.contract-title text:first-child {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.badge {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+}
+
+.badge-primary {
+  background-color: rgba(52, 120, 246, 0.1);
+  color: var(--primary-color);
+}
+
+.badge-warning {
+  background-color: rgba(250, 173, 20, 0.1);
+  color: var(--warning-color);
+}
+
+.badge-success {
+  background-color: rgba(82, 196, 26, 0.1);
+  color: var(--success-color);
+}
+
+.badge-danger {
+  background-color: rgba(255, 77, 79, 0.1);
+  color: var(--danger-color);
+}
+
+.contract-parties, .contract-dates {
+  font-size: 24rpx;
+  color: var(--text-color-secondary);
+  margin-bottom: 10rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.contract-parties text, .contract-dates text {
+  margin-bottom: 6rpx;
+}
+
+.contract-actions {
+  margin-top: 16rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-sign {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 24rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 6rpx;
+  line-height: 1.5;
+  min-height: auto;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-state image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-state text {
+  font-size: 28rpx;
+  color: var(--text-color-secondary);
+  margin-bottom: 30rpx;
+}
+
+.btn-create {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-size: 28rpx;
+  padding: 16rpx 40rpx;
+  border-radius: 8rpx;
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 40rpx;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 60rpx;
+  box-shadow: 0 4rpx 16rpx rgba(52, 120, 246, 0.3);
+}

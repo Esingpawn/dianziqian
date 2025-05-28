@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80">
+  <circle cx="40" cy="40" r="36" stroke="#e0e0e0" stroke-width="8" fill="none" />
+  <path d="M40 4 A 36 36 0 0 1 76 40" stroke="#3B82F6" stroke-width="8" fill="none" stroke-linecap="round" />
+  <animateTransform
+    attributeName="transform"
+    attributeType="XML"
+    type="rotate"
+    from="0 40 40"
+    to="360 40 40"
+    dur="1s"
+    repeatCount="indefinite" />
+</svg> 

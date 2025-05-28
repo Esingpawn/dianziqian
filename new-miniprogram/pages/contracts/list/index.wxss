@@ -1,0 +1,256 @@
+/* pages/contracts/list/index.wxss */
+.container {
+  padding: 30rpx;
+  padding-bottom: 120rpx;
+}
+
+/* 搜索框 */
+.search-box {
+  margin-bottom: 30rpx;
+}
+
+.search-input-wrap {
+  position: relative;
+  height: 80rpx;
+  background-color: #f5f5f5;
+  border-radius: 40rpx;
+  padding: 0 30rpx 0 70rpx;
+}
+
+.search-input {
+  height: 100%;
+  font-size: 28rpx;
+}
+
+.search-icon {
+  position: absolute;
+  left: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.clear-icon {
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+/* 状态筛选 */
+.filter-tabs {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 8rpx;
+  margin-bottom: 30rpx;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.filter-tab {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: var(--text-color-secondary);
+  position: relative;
+}
+
+.filter-tab.active {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.filter-tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background-color: var(--primary-color);
+  border-radius: 2rpx;
+}
+
+/* 合同列表 */
+.contract-list {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.contract-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 2rpx solid var(--border-color);
+}
+
+.contract-item:last-child {
+  border-bottom: none;
+}
+
+.contract-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.contract-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contract-info {
+  font-size: 26rpx;
+  color: var(--text-color-secondary);
+}
+
+.contract-parties {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10rpx;
+}
+
+.contract-parties text {
+  margin-bottom: 6rpx;
+}
+
+.contract-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contract-time {
+  color: var(--text-color-tertiary);
+}
+
+.contract-status {
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+
+.status-pending {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--primary-color);
+}
+
+.status-completed {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+
+.status-rejected {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error-color);
+}
+
+.contract-arrow {
+  width: 16rpx;
+  height: 16rpx;
+  border-top: 4rpx solid #ccc;
+  border-right: 4rpx solid #ccc;
+  transform: rotate(45deg);
+  margin-left: 20rpx;
+}
+
+/* 空状态 */
+.empty-state {
+  padding: 100rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: var(--card-shadow);
+}
+
+.empty-icon {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: var(--text-color-tertiary);
+}
+
+/* 加载中 */
+.loading {
+  padding: 30rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 10rpx;
+  border: 4rpx solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: 24rpx;
+  color: var(--text-color-tertiary);
+}
+
+/* 加载完成 */
+.load-all {
+  text-align: center;
+  padding: 30rpx 0;
+  font-size: 24rpx;
+  color: var(--text-color-tertiary);
+}
+
+/* 创建合同按钮 */
+.create-btn {
+  position: fixed;
+  right: 40rpx;
+  bottom: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 4rpx 10rpx rgba(59, 130, 246, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-icon {
+  font-size: 60rpx;
+  color: #ffffff;
+  line-height: 1;
+} 

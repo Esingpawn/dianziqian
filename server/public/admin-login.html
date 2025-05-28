@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员登录</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .login-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1, h3 {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background-color: #1890ff;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #40a9ff;
+        }
+
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow: auto;
+            max-height: 200px;
+            display: none;
+        }
+
+        .success {
+            background-color: #f6ffed;
+            border: 1px solid #b7eb8f;
+        }
+
+        .error {
+            background-color: #fff2f0;
+            border: 1px solid #ffccc7;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h1>电子签署系统</h1>
+        <h3>管理员登录</h3>
+        <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="text" id="username" value="admin" placeholder="请输入用户名" />
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" value="admin123" placeholder="请输入密码" />
+        </div>
+        <button id="login-btn">登录</button>
+        <div id="response" class="response"></div>
+    </div>
+
+    <script>
+        document.getElementById('login-btn').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                showResponse('请输入用户名和密码', false);
+                return;
+            }
+
+            // 显示加载状态
+            const button = document.getElementById('login-btn');
+            button.textContent = '登录中...';
+            button.disabled = true;
+
+            // 发送登录请求
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.data && data.data.token) {
+                    // 登录成功
+                    showResponse('登录成功！正在跳转...', true);
+                    
+                    // 设置Cookie
+                    document.cookie = `token=${data.data.token}; path=/; max-age=604800`; // 7天过期
+                    
+                    // 存储用户信息到localStorage
+                    localStorage.setItem('user', JSON.stringify(data.data.user));
+                    
+                    // 跳转到仪表盘
+                    setTimeout(() => {
+                        window.location.href = '/dashboard';
+                    }, 1000);
+                } else {
+                    // 登录失败
+                    showResponse('登录失败: ' + (data.message || '未知错误'), false);
+                }
+            })
+            .catch(error => {
+                showResponse('请求错误: ' + error.message, false);
+            })
+            .finally(() => {
+                // 恢复按钮状态
+                button.textContent = '登录';
+                button.disabled = false;
+            });
+        });
+
+        function showResponse(text, isSuccess) {
+            const responseElement = document.getElementById('response');
+            responseElement.textContent = text;
+            responseElement.className = 'response ' + (isSuccess ? 'success' : 'error');
+            responseElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html> 

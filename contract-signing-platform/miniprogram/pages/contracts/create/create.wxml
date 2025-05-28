@@ -1,0 +1,86 @@
+&lt;!-- pages/contracts/create/create.wxml -->
+<view class="container">
+  <view class="form-section">
+    <view class="section-title">合同信息</view>
+    
+    <view class="input-group">
+      <view class="input-label">合同标题</view>
+      <input class="input" placeholder="请输入合同标题" value="{{title}}" bindinput="handleTitleInput" />
+    </view>
+    
+    <view class="input-group">
+      <view class="input-label">合同类型</view>
+      <picker bindchange="handleContractTypeChange" value="{{contractTypeIndex}}" range="{{contractTypes}}" range-key="name">
+        <view class="picker">
+          <text>{{contractTypes[contractTypeIndex].name || '请选择合同类型'}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+    
+    <view class="input-group">
+      <view class="input-label">合同文件</view>
+      <view class="upload-box" bindtap="chooseFile">
+        <view wx:if="{{!fileUrl}}" class="upload-placeholder">
+          <view class="upload-icon">+</view>
+          <text>点击上传合同文件</text>
+        </view>
+        <view wx:else class="file-info">
+          <view class="file-icon">PDF</view>
+          <view class="file-details">
+            <text class="file-name">{{fileName}}</text>
+            <text class="file-size">{{fileSize}}</text>
+          </view>
+          <view class="file-actions">
+            <text class="action-preview" catchtap="previewFile">预览</text>
+            <text class="action-delete" catchtap="deleteFile">删除</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="form-section">
+    <view class="section-title">签署方信息</view>
+    
+    <view class="input-group">
+      <view class="input-label">签署方手机号</view>
+      <input class="input" type="number" placeholder="请输入签署方手机号" value="{{recipientPhone}}" bindinput="handleRecipientPhoneInput" />
+    </view>
+    
+    <view class="input-group">
+      <view class="input-label">截止时间</view>
+      <picker mode="date" value="{{endDate}}" start="{{today}}" end="2030-12-31" bindchange="handleEndDateChange">
+        <view class="picker">
+          <text>{{endDate || '请选择截止日期'}}</text>
+          <text class="picker-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+  
+  <view class="form-section">
+    <view class="section-title">套餐信息</view>
+    
+    <view class="package-info">
+      <view class="package-type">
+        <text>套餐类型：</text>
+        <text class="package-value">{{userType === 'personal' ? '个人套餐' : '企业套餐'}}</text>
+      </view>
+      <view class="package-count">
+        <text>剩余数量：</text>
+        <text class="package-value">{{packageCount}}</text>
+      </view>
+    </view>
+    
+    <view class="package-notice" wx:if="{{packageCount &lt;= 0}}">
+      <text>您的套餐已用完，请先购买套餐</text>
+      <button class="btn-buy" bindtap="goToBuyPackage">购买套餐</button>
+    </view>
+  </view>
+  
+  <view class="form-actions">
+    <button class="btn-cancel" bindtap="cancel">取消</button>
+    <button class="btn-submit" bindtap="submitContract" disabled="{{!canSubmit}}">发起合同</button>
+  </view>
+</view>

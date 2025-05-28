@@ -1,0 +1,263 @@
+/* pages/contracts/sign/index.wxss */
+.container {
+  padding: 30rpx;
+}
+
+/* 合同信息 */
+.contract-info {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.contract-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 15rpx;
+}
+
+.contract-status {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 签名方式选择 */
+.sign-method {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.method-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+
+.method-tabs {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.method-tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.method-tab.active {
+  color: #3B82F6;
+  font-weight: 500;
+}
+
+.method-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 4rpx;
+  background-color: #3B82F6;
+  border-radius: 2rpx;
+}
+
+/* 手写签名区域 */
+.signature-area {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.signature-title {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.canvas-container {
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 8rpx;
+  position: relative;
+}
+
+.signature-canvas {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.canvas-actions {
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.clear-btn {
+  width: 200rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  color: #666;
+  background-color: #f5f5f5;
+  border-radius: 35rpx;
+  text-align: center;
+}
+
+/* 印章选择区域 */
+.seal-area {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.seal-title {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.seal-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.seal-item {
+  width: 200rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+  padding: 15rpx;
+  border-radius: 8rpx;
+  border: 1px solid transparent;
+}
+
+.seal-item.selected {
+  border-color: #3B82F6;
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.seal-image {
+  width: 100%;
+  height: 150rpx;
+  margin-bottom: 10rpx;
+}
+
+.seal-name {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.seal-check {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #3B82F6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.empty-seals {
+  padding: 50rpx 0;
+  text-align: center;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+.create-seal-btn {
+  display: inline-block;
+  padding: 15rpx 30rpx;
+  background-color: #3B82F6;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+}
+
+/* 提交按钮 */
+.action-buttons {
+  margin-top: 50rpx;
+  padding: 0 30rpx;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 88rpx;
+  background-color: #3B82F6;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-btn.disabled {
+  background-color: #cccccc;
+}
+
+/* 加载中 */
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.loading-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 20rpx;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

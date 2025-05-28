@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "message": "获取用户信息成功",
+  "data": {
+    "id": "61fa9cbb6f2d7a1e9c5dcb3c",
+    "username": "zhangsan",
+    "name": "张三",
+    "phone": "13800138000",
+    "email": "zhangsan@example.com",
+    "role": "user",
+    "isVerified": true,
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-02T00:00:00Z"
+  }
+} 

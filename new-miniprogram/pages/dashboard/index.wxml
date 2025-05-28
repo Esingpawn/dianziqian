@@ -1,0 +1,98 @@
+<!-- pages/dashboard/index.wxml -->
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatar || '/assets/images/default-avatar.png'}}"></image>
+      <view class="user-detail">
+        <view class="username">{{userInfo.name || '未登录'}}</view>
+        <view class="user-tag">
+          <view class="tag {{userInfo.isEnterpriseVerified ? 'tag-success' : 'tag-warning'}}">
+            {{userInfo.isEnterpriseVerified ? '已认证企业' : '未认证企业'}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="user-actions">
+      <view class="action-btn" bindtap="handleLogout">退出登录</view>
+    </view>
+  </view>
+  
+  <!-- 合同统计 -->
+  <view class="stats-card">
+    <view class="card-title">合同统计</view>
+    <view class="stats-grid">
+      <view class="stats-item" bindtap="goToContracts">
+        <view class="stats-value">{{contractStats.total}}</view>
+        <view class="stats-label">全部合同</view>
+      </view>
+      <view class="stats-item" bindtap="goToContracts" data-status="pending">
+        <view class="stats-value text-primary">{{contractStats.pending}}</view>
+        <view class="stats-label">待处理</view>
+      </view>
+      <view class="stats-item" bindtap="goToContracts" data-status="completed">
+        <view class="stats-value text-success">{{contractStats.completed}}</view>
+        <view class="stats-label">已完成</view>
+      </view>
+      <view class="stats-item" bindtap="goToContracts" data-status="rejected">
+        <view class="stats-value text-error">{{contractStats.rejected}}</view>
+        <view class="stats-label">已拒绝</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 功能菜单 -->
+  <view class="menu-card">
+    <view class="card-title">常用功能</view>
+    <view class="menu-grid">
+      <view class="menu-item" bindtap="goToCreateContract">
+        <image class="menu-icon" src="/assets/icons/png/icon-contract-create.png"></image>
+        <view class="menu-label">创建合同</view>
+      </view>
+      <view class="menu-item" bindtap="goToContracts">
+        <image class="menu-icon" src="/assets/icons/png/icon-contract-list.png"></image>
+        <view class="menu-label">合同列表</view>
+      </view>
+      <view class="menu-item" bindtap="goToSealManagement">
+        <image class="menu-icon" src="/assets/icons/png/icon-seal.png"></image>
+        <view class="menu-label">印章管理</view>
+      </view>
+      <view class="menu-item" bindtap="goToEnterpriseVerification">
+        <image class="menu-icon" src="/assets/icons/png/icon-enterprise.png"></image>
+        <view class="menu-label">企业认证</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 最近合同 -->
+  <view class="recent-card">
+    <view class="card-header">
+      <view class="card-title">最近合同</view>
+      <view class="more-link" bindtap="goToContracts">查看全部</view>
+    </view>
+    
+    <view class="contract-list" wx:if="{{recentContracts.length > 0}}">
+      <view class="contract-item" wx:for="{{recentContracts}}" wx:key="id" bindtap="goToContractDetail" data-id="{{item.id}}">
+        <view class="contract-info">
+          <view class="contract-title">{{item.title}}</view>
+          <view class="contract-meta">
+            <text class="contract-time">{{item.createTime}}</text>
+            <view class="contract-status status-{{item.status}}">{{item.statusText}}</view>
+          </view>
+        </view>
+        <view class="contract-arrow"></view>
+      </view>
+    </view>
+    
+    <view class="empty-state" wx:else>
+      <image class="empty-icon" src="/assets/images/empty-state.png"></image>
+      <view class="empty-text">暂无合同记录</view>
+    </view>
+  </view>
+  
+  <!-- 加载中 -->
+  <view class="loading-mask" wx:if="{{isLoading}}">
+    <image class="loading-icon" src="/assets/images/loading.png"></image>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view> 

@@ -1,0 +1,45 @@
+{
+  "name": "esign",
+  "version": "1.0.0",
+  "description": "电子合同签署系统",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest",
+    "validate:api": "node scripts/api-validator-cli.js",
+    "validate:api:examples": "node scripts/api-validator-cli.js tests/responses/user-response.json user && node scripts/api-validator-cli.js tests/responses/contract-response.json contract && node scripts/api-validator-cli.js tests/responses/seal-response.json seal && node scripts/api-validator-cli.js tests/responses/enterprise-response.json enterprise",
+    "review:code": "node scripts/code-reviewer.js",
+    "review:server": "node scripts/code-reviewer.js ./server/src",
+    "review:miniprogram": "node scripts/code-reviewer.js ./new-miniprogram/api",
+    "review:web": "node scripts/code-reviewer.js ./web/src/api",
+    "review:all": "npm run review:server && npm run review:miniprogram && npm run review:web"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-repo/esign.git"
+  },
+  "keywords": [
+    "esign",
+    "electronic",
+    "contract",
+    "signature"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "multer": "^1.4.3",
+    "glob": "^8.0.3"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.6"
+  }
+} 

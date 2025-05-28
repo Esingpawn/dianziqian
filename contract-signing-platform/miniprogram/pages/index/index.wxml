@@ -1,0 +1,58 @@
+&lt;!-- pages/index/index.wxml -->
+<view class="container">
+  <view class="user-info-card">
+    <view class="user-info">
+      <view class="avatar">
+        <text wx:if="{{!userInfo.avatarUrl}}">{{userInfo.name ? userInfo.name.substring(0, 1) : '用'}}</text>
+        <image wx:else src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+      </view>
+      <view class="user-details">
+        <view class="user-name">{{userInfo.name || '用户'}}</view>
+        <view class="user-status">
+          <text class="{{userInfo.isVerified ? 'verified' : 'unverified'}}">
+            {{userInfo.isVerified ? '已实名认证' : '未实名认证'}}
+          </text>
+          <text wx:if="{{!userInfo.isVerified}}" class="verify-now" bindtap="goToVerification">立即认证</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="user-type-switch">
+      <view class="{{userType === 'personal' ? 'active' : ''}}" bindtap="switchToPersonal">
+        <text>个人套餐</text>
+        <text class="count">{{personalCount || 0}}</text>
+      </view>
+      <view class="{{userType === 'enterprise' ? 'active' : ''}}" bindtap="switchToEnterprise">
+        <text>企业套餐</text>
+        <text class="count">{{enterpriseCount || 0}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="quick-actions">
+    <view class="action-item" bindtap="goToEnterprise">
+      <view class="action-icon enterprise-icon"></view>
+      <text>我的企业</text>
+    </view>
+    <view class="action-item" bindtap="goToSeals">
+      <view class="action-icon seal-icon"></view>
+      <text>企业印章</text>
+    </view>
+    <view class="action-item" bindtap="goToContracts">
+      <view class="action-icon contract-icon"></view>
+      <text>文件管理</text>
+    </view>
+    <view class="action-item" bindtap="goToPrivacy">
+      <view class="action-icon privacy-icon"></view>
+      <text>隐私政策</text>
+    </view>
+    <view class="action-item" bindtap="goToSettings">
+      <view class="action-icon settings-icon"></view>
+      <text>修改密码</text>
+    </view>
+  </view>
+  
+  <view class="create-contract-btn" bindtap="createContract">
+    <text>发起合同</text>
+  </view>
+</view>

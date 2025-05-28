@@ -1,0 +1,123 @@
+name: API字段验证
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'server/src/**'
+      - 'new-miniprogram/api/**'
+      - 'web/src/api/**'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'server/src/**'
+      - 'new-miniprogram/api/**'
+      - 'web/src/api/**'
+
+jobs:
+  validate-api:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 签出代码
+        uses: actions/checkout@v3
+      
+      - name: 设置Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          
+      - name: 安装依赖
+        run: |
+          npm install -g glob
+          npm install
+      
+      - name: 验证API响应格式
+        run: |
+          # 创建示例响应存储目录
+          mkdir -p tests/responses
+          
+          # 提取API响应样本
+          node -e "
+            const fs = require('fs');
+            const path = require('path');
+            const glob = require('glob');
+            
+            // 查找控制器文件
+            const files = glob.sync('server/src/controllers/**/*.js');
+            
+            // 从控制器中提取API响应示例
+            let exampleCount = 0;
+            files.forEach(file => {
+              const content = fs.readFileSync(file, 'utf8');
+              const module = path.basename(file, '.controller.js');
+              
+              // 提取res.json/res.send调用
+              const responseRegex = /res\.(json|send)\(([^)]+)\)/g;
+              let match;
+              let fileExampleCount = 0;
+              
+              while ((match = responseRegex.exec(content)) !== null) {
+                try {
+                  // 尝试获取响应对象
+                  const responseCode = match[2];
+                  
+                  // 仅保存带有完整对象的响应
+                  if (responseCode.includes('{') && responseCode.includes('}')) {
+                    const outputPath = \`tests/responses/\${module}-example-\${++fileExampleCount}.json\`;
+                    fs.writeFileSync(outputPath, responseCode);
+                    exampleCount++;
+                  }
+                } catch (err) {
+                  console.error(\`提取响应失败: \${file}\`, err);
+                }
+              }
+            });
+            
+            console.log(\`共提取了 \${exampleCount} 个API响应示例\`);
+          "
+          
+          # 检查每个提取的响应
+          for file in tests/responses/*.json; do
+            module=$(basename $file | cut -d'-' -f1)
+            echo "检查文件: $file (模块: $module)"
+            node scripts/api-validator-cli.js $file $module || echo "警告: $file 不符合API规范"
+          done
+      
+      - name: 代码审查
+        run: |
+          # 审查服务端代码
+          echo "审查服务端代码..."
+          node scripts/code-reviewer.js ./server/src > server-code-review.txt
+          
+          # 审查小程序代码
+          echo "审查小程序代码..."
+          node scripts/code-reviewer.js ./new-miniprogram/api > miniprogram-code-review.txt
+          
+          # 审查Web端代码
+          echo "审查Web端代码..."
+          node scripts/code-reviewer.js ./web/src/api > web-code-review.txt
+          
+          # 统计问题
+          SERVER_ISSUES=$(grep -c "总问题数:" server-code-review.txt || echo "0")
+          MINI_ISSUES=$(grep -c "总问题数:" miniprogram-code-review.txt || echo "0")
+          WEB_ISSUES=$(grep -c "总问题数:" web-code-review.txt || echo "0")
+          
+          echo "服务端API问题数: $SERVER_ISSUES"
+          echo "小程序API问题数: $MINI_ISSUES"
+          echo "Web端API问题数: $WEB_ISSUES"
+          
+          # 发送警告但不阻止构建
+          if [ $SERVER_ISSUES -gt 0 ] || [ $MINI_ISSUES -gt 0 ] || [ $WEB_ISSUES -gt 0 ]; then
+            echo "::warning::发现API字段不规范问题，详情请查看审查报告"
+          fi
+      
+      - name: 上传审查报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: api-validation-reports
+          path: |
+            server-code-review.txt
+            miniprogram-code-review.txt
+            web-code-review.txt
+            tests/responses/ 

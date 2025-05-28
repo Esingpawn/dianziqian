@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "bcryptjs": "^3.0.2",
+    "mongoose": "^8.15.0",
+    "tdesign-miniprogram": "^1.9.3"
+  },
+  "name": "esign",
+  "version": "1.0.0",
+  "description": "本项目为现代化电子合同签署平台，支持合同在线签署、模板管理、企业管理、印章管理等功能，涵盖Web端、后端服务和微信小程序。",
+  "main": "checkRoutes.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

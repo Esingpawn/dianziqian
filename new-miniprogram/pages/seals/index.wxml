@@ -1,0 +1,65 @@
+<!-- pages/seals/index.wxml -->
+<view class="container">
+  <view class="header">
+    <view class="title">印章管理</view>
+    <view class="subtitle">管理您的电子印章，用于合同签署</view>
+  </view>
+  
+  <!-- 印章列表 -->
+  <view class="seal-list" wx:if="{{seals.length > 0}}">
+    <view class="seal-item" wx:for="{{seals}}" wx:key="id">
+      <view class="seal-content" bindtap="goToSealDetail" data-id="{{item.id}}">
+        <view class="seal-image">
+          <image src="{{item.imageUrl || '/assets/images/default-seal.png'}}" mode="aspectFit"></image>
+        </view>
+        <view class="seal-info">
+          <view class="seal-name">{{item.name}}</view>
+          <view class="seal-meta">
+            <view class="seal-type">{{item.type === 'personal' ? '个人印章' : '企业印章'}}</view>
+            <view class="seal-status {{item.status === 'authorized' ? 'status-success' : 'status-warning'}}">
+              {{item.status === 'authorized' ? '已授权' : '未授权'}}
+            </view>
+          </view>
+          <view class="seal-time">创建时间：{{item.createTime}}</view>
+        </view>
+      </view>
+      <view class="seal-actions">
+        <view 
+          class="seal-action {{item.status === 'authorized' ? 'disabled' : ''}}" 
+          bindtap="handleAuthorizeSeal" 
+          data-id="{{item.id}}" 
+          data-name="{{item.name}}"
+          wx:if="{{item.status !== 'authorized'}}"
+        >
+          授权
+        </view>
+        <view 
+          class="seal-action delete" 
+          bindtap="handleDeleteSeal" 
+          data-id="{{item.id}}" 
+          data-name="{{item.name}}"
+        >
+          删除
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{isEmpty}}">
+    <view class="empty-icon"></view>
+    <view class="empty-text">暂无印章记录</view>
+    <view class="empty-subtext">点击下方按钮创建新的印章</view>
+  </view>
+  
+  <!-- 加载中 -->
+  <view class="loading-mask" wx:if="{{isLoading}}">
+    <view class="loading-icon"></view>
+    <view class="loading-text">加载中...</view>
+  </view>
+  
+  <!-- 创建印章按钮 -->
+  <view class="create-btn" bindtap="goToCreateSeal">
+    <view class="create-icon">+</view>
+  </view>
+</view> 

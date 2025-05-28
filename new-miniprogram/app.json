@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/dashboard/index",
+    "pages/contracts/list/index",
+    "pages/contracts/detail/index",
+    "pages/contracts/sign/index",
+    "pages/contracts/create/index",
+    "pages/auth/login/index",
+    "pages/auth/register/index",
+    "pages/enterprise/index",
+    "pages/seals/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "电子合同签署平台",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#3B82F6",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/dashboard/index",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/contracts/list/index",
+        "text": "合同",
+        "iconPath": "assets/icons/contract.png",
+        "selectedIconPath": "assets/icons/contract-active.png"
+      },
+      {
+        "pagePath": "pages/seals/index",
+        "text": "印章",
+        "iconPath": "assets/icons/seal.png",
+        "selectedIconPath": "assets/icons/seal-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于合同签署时的地理位置验证"
+    }
+  },
+  "requiredPrivateInfos": ["getLocation"]
+} 

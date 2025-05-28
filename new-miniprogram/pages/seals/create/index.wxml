@@ -1,0 +1,62 @@
+<!-- pages/seals/create/index.wxml -->
+<view class="container">
+  <view class="form-card">
+    <view class="form-title">创建印章</view>
+    
+    <!-- 印章名称 -->
+    <view class="form-item">
+      <view class="form-label">印章名称</view>
+      <input 
+        class="form-input" 
+        placeholder="请输入印章名称" 
+        value="{{name}}" 
+        bindinput="handleNameInput"
+      />
+    </view>
+    
+    <!-- 印章类型 -->
+    <view class="form-item">
+      <view class="form-label">印章类型</view>
+      <radio-group class="radio-group" bindchange="handleTypeChange">
+        <label class="radio-item">
+          <radio value="personal" checked="{{type === 'personal'}}" />
+          <text class="radio-text">个人印章</text>
+        </label>
+        <label class="radio-item {{!enterpriseVerified ? 'disabled' : ''}}">
+          <radio value="enterprise" checked="{{type === 'enterprise'}}" disabled="{{!enterpriseVerified}}" />
+          <text class="radio-text">企业印章</text>
+          <view class="enterprise-tip" wx:if="{{!enterpriseVerified}}" bindtap="goToEnterpriseVerification">
+            未认证企业，点击认证
+          </view>
+        </label>
+      </radio-group>
+    </view>
+    
+    <!-- 印章图片 -->
+    <view class="form-item">
+      <view class="form-label">印章图片</view>
+      <view class="image-upload">
+        <view class="upload-box" wx:if="{{!tempFilePath}}" bindtap="handleChooseImage">
+          <image class="upload-icon" src="/assets/icons/png/icon-add.png"></image>
+          <view class="upload-text">点击上传图片</view>
+        </view>
+        <view class="image-preview" wx:else>
+          <image class="preview-image" src="{{tempFilePath}}" mode="aspectFit"></image>
+          <view class="delete-btn" bindtap="handleDeleteImage">
+            <image class="delete-icon" src="/assets/icons/png/icon-clear.png"></image>
+          </view>
+        </view>
+      </view>
+      <view class="image-tip">支持JPG、PNG格式，建议使用透明背景的PNG图片</view>
+    </view>
+    
+    <!-- 提交按钮 -->
+    <button 
+      class="submit-btn {{isSubmitting ? 'disabled' : ''}}" 
+      bindtap="handleSubmit" 
+      disabled="{{isSubmitting}}"
+    >
+      {{isSubmitting ? '创建中...' : '创建印章'}}
+    </button>
+  </view>
+</view> 

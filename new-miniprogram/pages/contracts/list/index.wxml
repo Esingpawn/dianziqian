@@ -1,0 +1,79 @@
+<!-- pages/contracts/list/index.wxml -->
+<view class="container">
+  <!-- 搜索框 -->
+  <view class="search-box">
+    <view class="search-input-wrap">
+      <input 
+        type="text" 
+        placeholder="搜索合同" 
+        value="{{searchValue}}" 
+        confirm-type="search" 
+        bindconfirm="handleSearch"
+        class="search-input"
+      />
+      <image class="search-icon" src="/assets/icons/png/icon-search.png"></image>
+      <image class="clear-icon" wx:if="{{searchValue}}" bindtap="handleClearSearch" src="/assets/icons/png/icon-clear.png"></image>
+    </view>
+  </view>
+  
+  <!-- 状态筛选 -->
+  <view class="filter-tabs">
+    <view 
+      class="filter-tab {{currentStatus === item.value ? 'active' : ''}}" 
+      wx:for="{{statusOptions}}" 
+      wx:key="value" 
+      bindtap="handleStatusChange" 
+      data-status="{{item.value}}"
+    >
+      {{item.label}}
+    </view>
+  </view>
+  
+  <!-- 合同列表 -->
+  <view class="contract-list" wx:if="{{contracts.length > 0}}">
+    <view 
+      class="contract-item" 
+      wx:for="{{contracts}}" 
+      wx:key="id" 
+      bindtap="goToContractDetail" 
+      data-id="{{item.id}}"
+    >
+      <view class="contract-content">
+        <view class="contract-title">{{item.title}}</view>
+        <view class="contract-info">
+          <view class="contract-parties">
+            <text>发起方：{{item.initiator}}</text>
+            <text>接收方：{{item.receiver}}</text>
+          </view>
+          <view class="contract-meta">
+            <text class="contract-time">{{item.createTime}}</text>
+            <view class="contract-status status-{{item.status}}">{{item.statusText}}</view>
+          </view>
+        </view>
+      </view>
+      <image class="contract-arrow" src="/assets/icons/png/icon-arrow-right.png"></image>
+    </view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{isEmpty}}">
+    <image class="empty-icon" src="/assets/images/empty-state.png"></image>
+    <view class="empty-text">暂无合同记录</view>
+  </view>
+  
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{isLoading && !isEmpty}}">
+    <image class="loading-icon" src="/assets/images/loading.png"></image>
+    <view class="loading-text">加载中...</view>
+  </view>
+  
+  <!-- 加载完成 -->
+  <view class="load-all" wx:if="{{!isLoading && !hasMore && contracts.length > 0}}">
+    已加载全部数据
+  </view>
+  
+  <!-- 创建合同按钮 -->
+  <view class="create-btn" bindtap="goToCreateContract">
+    <image class="create-icon" src="/assets/icons/png/icon-add.png"></image>
+  </view>
+</view> 

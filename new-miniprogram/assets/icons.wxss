@@ -1,0 +1,93 @@
+/* 图标样式 */
+
+/* 菜单图标 */
+.icon-contract-create {
+  background-image: url('icons/png/icon-contract-create.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.icon-contract-list {
+  background-image: url('icons/png/icon-contract-list.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.icon-enterprise {
+  background-image: url('icons/png/icon-enterprise.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.icon-seal {
+  background-image: url('icons/png/icon-seal.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.icon-add {
+  background-image: url('icons/png/icon-add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* 状态图标 */
+.icon-empty {
+  background-image: url('icons/png/icon-empty.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* 菜单图标通用样式 */
+.menu-icon {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 状态图标 */
+.status-icon {
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 微信图标 */
+.wechat-icon {
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+}
+
+/* 动画 */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.icon-loading {
+  width: 80rpx;
+  height: 80rpx;
+  animation: spin 1s linear infinite;
+}
+
+/* 空状态图标 */
+.empty-icon {
+  width: 160rpx;
+  height: 160rpx;
+  margin: 0 auto;
+} 

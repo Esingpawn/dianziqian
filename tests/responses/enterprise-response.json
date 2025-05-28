@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "message": "获取企业信息成功",
+  "data": {
+    "id": "61fa9cbb6f2d7a1e9c5dcb41",
+    "name": "测试企业",
+    "logo": "https://example.com/logos/company-logo.png",
+    "businessLicense": "https://example.com/licenses/business-license.png",
+    "legalRepresentative": "李四",
+    "isVerified": true,
+    "createdAt": "2023-01-01T00:00:00Z",
+    "updatedAt": "2023-01-02T00:00:00Z",
+    "adminId": "61fa9cbb6f2d7a1e9c5dcb3c",
+    "members": [
+      {
+        "id": "61fa9cbb6f2d7a1e9c5dcb3c",
+        "name": "张三",
+        "phone": "13800138000",
+        "role": "enterprise_admin"
+      }
+    ]
+  }
+} 

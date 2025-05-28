@@ -1,0 +1,89 @@
+<!--pages/contracts/sign/index.wxml-->
+<view class="container">
+  <!-- 合同信息 -->
+  <view class="contract-info" wx:if="{{contract}}">
+    <view class="contract-title">{{contract.title}}</view>
+    <view class="contract-status">状态：{{contract.statusText}}</view>
+  </view>
+  
+  <!-- 签名方式选择 -->
+  <view class="sign-method">
+    <view class="method-title">选择签署方式</view>
+    <view class="method-tabs">
+      <view 
+        class="method-tab {{signMethod === 'draw' ? 'active' : ''}}" 
+        bindtap="handleSwitchSignMethod" 
+        data-method="draw"
+      >
+        手写签名
+      </view>
+      <view 
+        class="method-tab {{signMethod === 'seal' ? 'active' : ''}}" 
+        bindtap="handleSwitchSignMethod" 
+        data-method="seal"
+      >
+        印章签名
+      </view>
+    </view>
+  </view>
+  
+  <!-- 手写签名区域 -->
+  <view class="signature-area" wx:if="{{signMethod === 'draw'}}">
+    <view class="signature-title">请在下方区域手写签名</view>
+    <view class="canvas-container" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;">
+      <canvas 
+        canvas-id="signatureCanvas" 
+        class="signature-canvas"
+        style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;"
+        disable-scroll="true"
+        bindtouchstart="handleTouchStart"
+        bindtouchmove="handleTouchMove"
+        bindtouchend="handleTouchEnd"
+      ></canvas>
+    </view>
+    <view class="canvas-actions">
+      <button class="clear-btn" bindtap="clearSignature">清除</button>
+    </view>
+  </view>
+  
+  <!-- 印章选择区域 -->
+  <view class="seal-area" wx:if="{{signMethod === 'seal'}}">
+    <view class="seal-title">请选择印章</view>
+    <view class="seal-list" wx:if="{{seals.length > 0}}">
+      <view 
+        class="seal-item {{item.id === selectedSealId ? 'selected' : ''}}" 
+        wx:for="{{seals}}" 
+        wx:key="id"
+        bindtap="handleSelectSeal"
+        data-id="{{item.id}}"
+      >
+        <image class="seal-image" src="{{item.imageUrl}}" mode="aspectFit"></image>
+        <view class="seal-name">{{item.name}}</view>
+        <view class="seal-check" wx:if="{{item.id === selectedSealId}}">
+          <image class="check-icon" src="/assets/icons/png/icon-check.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="empty-seals" wx:else>
+      <view class="empty-text">暂无印章，请先创建印章</view>
+      <navigator url="/pages/seals/create/index" class="create-seal-btn">创建印章</navigator>
+    </view>
+  </view>
+  
+  <!-- 提交按钮 -->
+  <view class="action-buttons">
+    <button 
+      class="submit-btn {{isSubmitting ? 'disabled' : ''}}" 
+      bindtap="handleSubmit" 
+      disabled="{{isSubmitting}}"
+    >
+      {{isSubmitting ? '签署中...' : '确认签署'}}
+    </button>
+  </view>
+  
+  <!-- 加载中 -->
+  <view class="loading-mask" wx:if="{{isLoading}}">
+    <image class="loading-icon" src="/assets/images/loading.png"></image>
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

@@ -1,0 +1,157 @@
+&lt;!-- pages/contracts/detail/detail.wxml -->
+<view class="container">
+  <view class="contract-header">
+    <view class="contract-title">
+      <text>{{contract.title}}</text>
+      <text class="badge {{contract.status === 'pending' ? 'badge-primary' : contract.status === 'waiting' ? 'badge-warning' : contract.status === 'completed' ? 'badge-success' : 'badge-danger'}}">
+        {{contract.status === 'pending' ? '待我处理' : contract.status === 'waiting' ? '待他人处理' : contract.status === 'completed' ? '已完成' : contract.status === 'rejected' ? '已拒签' : contract.status === 'revoked' ? '已撤销' : '已逾期'}}
+      </text>
+    </view>
+  </view>
+  
+  <view class="contract-info-card">
+    <view class="info-item">
+      <text class="label">发起方</text>
+      <text class="value">{{contract.initiator}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">签署方</text>
+      <text class="value">{{contract.recipient}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">发起时间</text>
+      <text class="value">{{contract.startDate}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">截止时间</text>
+      <text class="value">{{contract.endDate}}</text>
+    </view>
+  </view>
+  
+  <view class="section-title">签署流程</view>
+  
+  <view class="signing-process">
+    <view class="process-item {{contract.initiatorSigned ? 'completed' : ''}}">
+      <view class="process-icon">1</view>
+      <view class="process-line" wx:if="{{!contract.initiatorSigned}}"></view>
+      <view class="process-line completed" wx:else></view>
+      <view class="process-content">
+        <view class="process-title">发起方</view>
+        <view class="signer-info">
+          <view class="signer-avatar">{{contract.initiator.substring(0, 1)}}</view>
+          <view class="signer-details">
+            <text>{{contract.initiator}}</text>
+            <text class="sign-time">{{contract.initiatorSigned ? '签署时间: ' + contract.initiatorSignTime : '等待签署'}}</text>
+          </view>
+          <text class="sign-status {{contract.initiatorSigned ? 'completed' : ''}}">
+            {{contract.initiatorSigned ? '已签署' : '待签署'}}
+          </text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="process-item {{contract.recipientSigned ? 'completed' : ''}}">
+      <view class="process-icon">2</view>
+      <view class="process-content">
+        <view class="process-title">签署方</view>
+        <view class="signer-info">
+          <view class="signer-avatar">{{contract.recipient.substring(0, 1)}}</view>
+          <view class="signer-details">
+            <text>{{contract.recipient}}</text>
+            <text class="sign-time">{{contract.recipientSigned ? '签署时间: ' + contract.recipientSignTime : '等待签署'}
+
+I need to complete the WXML file as it was cut off.
+
+```wxml file="miniprogram/pages/contracts/detail/detail.wxml"
+&lt;!-- pages/contracts/detail/detail.wxml -->
+<view class="container">
+  <view class="contract-header">
+    <view class="contract-title">
+      <text>{{contract.title}}</text>
+      <text class="badge {{contract.status === 'pending' ? 'badge-primary' : contract.status === 'waiting' ? 'badge-warning' : contract.status === 'completed' ? 'badge-success' : 'badge-danger'}}">
+        {{contract.status === 'pending' ? '待我处理' : contract.status === 'waiting' ? '待他人处理' : contract.status === 'completed' ? '已完成' : contract.status === 'rejected' ? '已拒签' : contract.status === 'revoked' ? '已撤销' : '已逾期'}}
+      </text>
+    </view>
+  </view>
+  
+  <view class="contract-info-card">
+    <view class="info-item">
+      <text class="label">发起方</text>
+      <text class="value">{{contract.initiator}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">签署方</text>
+      <text class="value">{{contract.recipient}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">发起时间</text>
+      <text class="value">{{contract.startDate}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">截止时间</text>
+      <text class="value">{{contract.endDate}}</text>
+    </view>
+  </view>
+  
+  <view class="section-title">签署流程</view>
+  
+  <view class="signing-process">
+    <view class="process-item {{contract.initiatorSigned ? 'completed' : ''}}">
+      <view class="process-icon">1</view>
+      <view class="process-line" wx:if="{{!contract.initiatorSigned}}"></view>
+      <view class="process-line completed" wx:else></view>
+      <view class="process-content">
+        <view class="process-title">发起方</view>
+        <view class="signer-info">
+          <view class="signer-avatar">{{contract.initiator.substring(0, 1)}}</view>
+          <view class="signer-details">
+            <text>{{contract.initiator}}</text>
+            <text class="sign-time">{{contract.initiatorSigned ? '签署时间: ' + contract.initiatorSignTime : '等待签署'}}</text>
+          </view>
+          <text class="sign-status {{contract.initiatorSigned ? 'completed' : ''}}">
+            {{contract.initiatorSigned ? '已签署' : '待签署'}}
+          </text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="process-item {{contract.recipientSigned ? 'completed' : ''}}">
+      <view class="process-icon">2</view>
+      <view class="process-content">
+        <view class="process-title">签署方</view>
+        <view class="signer-info">
+          <view class="signer-avatar">{{contract.recipient.substring(0, 1)}}</view>
+          <view class="signer-details">
+            <text>{{contract.recipient}}</text>
+            <text class="sign-time">{{contract.recipientSigned ? '签署时间: ' + contract.recipientSignTime : '等待签署'}}</text>
+          </view>
+          <text class="sign-status {{contract.recipientSigned ? 'completed' : ''}}">
+            {{contract.recipientSigned ? '已签署' : '待签署'}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <view class="section-title">合同文件</view>
+  
+  <view class="contract-file">
+    <view class="file-icon">PDF</view>
+    <view class="file-info">
+      <text class="file-name">{{contract.title}}.pdf</text>
+      <text class="file-size">{{contract.fileSize || '24.58Kb'}}</text>
+    </view>
+    <view class="file-actions">
+      <button class="btn-file" bindtap="previewFile">查看</button>
+      <button class="btn-file" bindtap="downloadFile">下载</button>
+    </view>
+  </view>
+  
+  <view class="contract-actions" wx:if="{{contract.status === 'pending'}}">
+    <button class="btn-sign" bindtap="goToSignContract">签署合同</button>
+  </view>
+  
+  <view class="contract-actions" wx:if="{{contract.status === 'completed'}}">
+    <button class="btn-detail">查看详情</button>
+  </view>
+</view>

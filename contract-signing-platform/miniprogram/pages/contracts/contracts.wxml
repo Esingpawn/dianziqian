@@ -1,0 +1,49 @@
+&lt;!-- pages/contracts/contracts.wxml -->
+<view class="container">
+  <view class="tabs">
+    <view class="tab {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">全部</view>
+    <view class="tab {{currentTab === 'pending' ? 'active' : ''}}" bindtap="switchTab" data-tab="pending">待我处理</view>
+    <view class="tab {{currentTab === 'waiting' ? 'active' : ''}}" bindtap="switchTab" data-tab="waiting">待他人处理</view>
+    <view class="tab {{currentTab === 'completed' ? 'active' : ''}}" bindtap="switchTab" data-tab="completed">已完成</view>
+    <view class="tab {{currentTab === 'rejected' ? 'active' : ''}}" bindtap="switchTab" data-tab="rejected">已拒签</view>
+  </view>
+  
+  <view class="contract-list">
+    <block wx:if="{{contracts.length > 0}}">
+      <view class="contract-item" wx:for="{{contracts}}" wx:key="id" bindtap="goToContractDetail" data-id="{{item.id}}">
+        <view class="contract-icon">
+          <image src="/images/contract-file.png" mode="aspectFit"></image>
+        </view>
+        <view class="contract-info">
+          <view class="contract-title">
+            <text>{{item.title}}</text>
+            <text class="badge {{item.status === 'pending' ? 'badge-primary' : item.status === 'waiting' ? 'badge-warning' : item.status === 'completed' ? 'badge-success' : 'badge-danger'}}">
+              {{item.status === 'pending' ? '待我处理' : item.status === 'waiting' ? '待他人处理' : item.status === 'completed' ? '已完成' : item.status === 'rejected' ? '已拒签' : item.status === 'revoked' ? '已撤销' : '已逾期'}}
+            </text>
+          </view>
+          <view class="contract-parties">
+            <text>发起方：{{item.initiator}}</text>
+            <text>签署方：{{item.recipient}}</text>
+          </view>
+          <view class="contract-dates">
+            <text>发起时间：{{item.startDate}}</text>
+            <text>截止时间：{{item.endDate}}</text>
+          </view>
+          <view class="contract-actions" wx:if="{{item.status === 'pending'}}">
+            <button class="btn-sign" catchtap="goToSignContract" data-id="{{item.id}}">签署</button>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <view wx:else class="empty-state">
+      <image src="/images/empty-contracts.png" mode="aspectFit"></image>
+      <text>暂无合同</text>
+      <button class="btn-create" bindtap="createContract">发起合同</button>
+    </view>
+  </view>
+  
+  <view class="floating-button" bindtap="createContract">
+    <text>+</text>
+  </view>
+</view>

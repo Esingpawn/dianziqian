@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/personal/personal",
+    "pages/contracts/contracts",
+    "pages/contracts/detail/detail",
+    "pages/contracts/create/create",
+    "pages/contracts/sign/sign",
+    "pages/enterprise/enterprise",
+    "pages/enterprise/members/members",
+    "pages/seals/seals",
+    "pages/verification/personal/personal",
+    "pages/verification/enterprise/enterprise",
+    "pages/packages/packages"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "电子合同签署",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#3478f6",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/contracts/contracts",
+        "text": "合同",
+        "iconPath": "images/contract.png",
+        "selectedIconPath": "images/contract-active.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "我的",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

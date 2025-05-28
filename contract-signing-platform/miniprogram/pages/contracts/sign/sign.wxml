@@ -1,0 +1,67 @@
+&lt;!-- pages/contracts/sign/sign.wxml -->
+<view class="container">
+  <view class="sign-container">
+    <view class="contract-preview">
+      <image class="contract-image" src="{{contractImageUrl || '/images/contract-preview.png'}}" mode="aspectFit"></image>
+      <view class="sign-position" style="top: {{signPosition.top}}rpx; left: {{signPosition.left}}rpx; width: {{signPosition.width}}rpx; height: {{signPosition.height}}rpx;">
+        <image wx:if="{{selectedSignatureUrl || selectedSealUrl}}" src="{{selectedSignatureUrl || selectedSealUrl}}" mode="aspectFit"></image>
+        <text wx:else>点击此处签署</text>
+      </view>
+    </view>
+    
+    <view class="preview-actions">
+      <button class="btn-action" bindtap="downloadContract">
+        <text class="icon-download"></text>
+        <text>下载</text>
+      </button>
+      <view class="action-divider"></view>
+      <button class="btn-action btn-reject" bindtap="rejectContract">
+        <text class="icon-reject"></text>
+        <text>拒签</text>
+      </button>
+      <button class="btn-action btn-submit" bindtap="submitContract">
+        <text class="icon-submit"></text>
+        <text>提交</text>
+      </button>
+    </view>
+  </view>
+  
+  <view class="sign-methods">
+    <view class="tabs">
+      <view class="tab {{signMethod === 'signature' ? 'active' : ''}}" bindtap="switchToSignature">手写签名</view>
+      <view class="tab {{signMethod === 'seal' ? 'active' : ''}}" bindtap="switchToSeal">盖章</view>
+    </view>
+    
+    <view class="sign-content" wx:if="{{signMethod === 'signature'}}">
+      <view class="signature-pad">
+        <canvas canvas-id="signatureCanvas" class="signature-canvas" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd"></canvas>
+        <view class="signature-actions">
+          <button class="btn-clear" bindtap="clearSignature">清除</button>
+          <button class="btn-confirm" bindtap="confirmSignature">确定</button>
+        </view>
+      </view>
+      
+      <view class="saved-signatures">
+        <view class="section-title">选择已保存的签名</view>
+        <view class="signatures-grid">
+          <view class="signature-item {{index === selectedSignatureIndex ? 'selected' : ''}}" wx:for="{{savedSignatures}}" wx:key="index" bindtap="selectSignature" data-index="{{index}}">
+            <image src="{{item}}" mode="aspectFit"></image>
+          </view>
+          <view class="signature-item add-new" bindtap="showSignaturePad">
+            <text class="icon-add">+</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view class="sign-content" wx:if="{{signMethod === 'seal'}}">
+      <view class="section-title">选择印章</view>
+      <view class="seals-grid">
+        <view class="seal-item {{index === selectedSealIndex ? 'selected' : ''}}" wx:for="{{seals}}" wx:key="id" bindtap="selectSeal" data-index="{{index}}">
+          <image src="{{item.imageUrl}}" mode="aspectFit"></image>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

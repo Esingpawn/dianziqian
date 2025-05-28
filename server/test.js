@@ -1,0 +1,1 @@
+const mongoose = require("mongoose"); const MONGODB_URI = "mongodb://contrct:990124lyx@82.156.176.105:27017/contrct?authSource=contrct"; console.log("启动数据库连接测试..."); mongoose.connect(MONGODB_URI).then(() => console.log("连接成功")).catch(e => console.error("连接失败", e));

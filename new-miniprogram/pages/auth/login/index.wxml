@@ -1,0 +1,63 @@
+<!-- pages/auth/login/index.wxml -->
+<view class="container">
+  <view class="login-card">
+    <view class="logo">
+      <view class="title">电子签约平台</view>
+      <view class="subtitle">便捷、高效、安全的电子合同签署平台</view>
+    </view>
+    
+    <view class="login-tabs">
+      <view class="tab {{loginType === 'phone' ? 'active' : ''}}" bindtap="switchLoginType" data-type="phone">手机验证码登录</view>
+      <view class="tab {{loginType === 'wechat' ? 'active' : ''}}" bindtap="switchLoginType" data-type="wechat">微信快捷登录</view>
+    </view>
+    
+    <view class="login-form" wx:if="{{loginType === 'phone'}}">
+      <view class="form-item">
+        <view class="input-container">
+          <input 
+            type="number" 
+            placeholder="请输入手机号" 
+            bindinput="handlePhoneInput" 
+            value="{{phoneNumber}}" 
+            maxlength="11" 
+            class="form-input"
+          />
+        </view>
+      </view>
+      
+      <view class="form-item">
+        <view class="input-container verification-code">
+          <input 
+            type="number" 
+            placeholder="请输入验证码" 
+            bindinput="handleCodeInput" 
+            value="{{verificationCode}}" 
+            maxlength="6" 
+            class="form-input"
+          />
+          <button 
+            class="code-btn {{isSendingCode ? 'disabled' : ''}}" 
+            bindtap="handleSendCode" 
+            disabled="{{isSendingCode}}"
+          >
+            {{isSendingCode ? countdown + '秒后重发' : '获取验证码'}}
+          </button>
+        </view>
+      </view>
+      
+      <button class="login-btn" bindtap="handlePhoneLogin" disabled="{{isLoggingIn}}">登录</button>
+    </view>
+    
+    <view class="wechat-login" wx:if="{{loginType === 'wechat'}}">
+      <button class="wechat-btn" bindtap="handleWechatLogin" disabled="{{isLoggingIn}}">
+        <view class="wechat-icon"></view>
+        微信一键登录
+      </button>
+      <view class="wechat-tip">授权后将获取您的微信昵称和头像</view>
+    </view>
+    
+    <view class="register-tip">
+      还没有账号？<text class="register-link" bindtap="goToRegister">立即注册</text>
+    </view>
+  </view>
+</view> 
